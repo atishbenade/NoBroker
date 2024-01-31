@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Entity
@@ -22,4 +23,7 @@ public class User {
     private  String password;
     private String mobile;
     private boolean emailVerified;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Subscription> subscriptions;
 }
