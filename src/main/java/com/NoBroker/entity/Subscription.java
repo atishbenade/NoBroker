@@ -22,4 +22,7 @@ public class Subscription {
     private int durationDays;
 
     private boolean activeSubscription;
+
+    private LocalDateTime expireDate;
+
 }

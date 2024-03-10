@@ -32,7 +32,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
                response.put("message","otp verified successfully");
 
            }else {
-
+             
                response.put("status","error");
                response.put("message","invalid otp");
            }

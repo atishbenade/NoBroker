@@ -9,6 +9,7 @@ import com.NoBroker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,19 +26,19 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setUser(user);
         subscription.setStartDate(LocalDateTime.now());
         subscription.setDurationDays(durationDays);
+        subscription.setExpireDate(LocalDateTime.now().plusDays(durationDays));
+
         subscription.setActiveSubscription(true);
 
         return subscriptionRepository.save(subscription);
     }
 
-    public List<Subscription> getUserActiveSubscriptions(User user) {
-        return subscriptionRepository.findByUserAndActiveSubscriptionTrue(user);
-    }
+
 
     public List<Subscription> findExpiredSubscriptions() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         return subscriptionRepository
-                .findByActiveSubscriptionTrueAndStartDateBefore(currentDateTime.minusDays(1));
+                .findByActiveSubscriptionTrueAndExpireDateBefore(LocalDate.now());
     }
 
     @Override

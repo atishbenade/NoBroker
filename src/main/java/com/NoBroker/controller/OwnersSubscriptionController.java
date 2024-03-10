@@ -25,12 +25,8 @@ public class OwnersSubscriptionController {
         return ResponseEntity.ok("Subscription created with ID: " + subscription.getId());
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Subscription>> getUserActiveSubscriptions(@PathVariable Long userId) {
-        User user = subscriptionService.findById(userId);
-        List<Subscription> activeSubscriptions = subscriptionService.getUserActiveSubscriptions(user);
-        return ResponseEntity.ok(activeSubscriptions);
-    }
+
+
 
     @Scheduled(fixedRate = 86400000) // Run every 24 hours
     public void expireSubscriptions() {
